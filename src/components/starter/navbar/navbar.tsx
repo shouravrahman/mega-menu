@@ -33,12 +33,7 @@ export default component$(() => {
             )}
           </div>
         </div>
-        <ul class="hidden items-center gap-8 md:flex">
-          {/* <li>
-            <a href="/" class="inline-block px-3 py-7">
-              Home
-            </a>
-          </li> */}
+        <ul class="hidden items-center gap-8 transition-all duration-500 ease-in-out md:flex">
           <Navlinks />
         </ul>
         <div class="hidden md:block">
@@ -47,15 +42,10 @@ export default component$(() => {
 
         {/* mobile menu */}
         <ul
-          class={`absolute  bottom-0 h-full  w-full bg-[#08153c]  py-24 pl-4 duration-500 ease-in md:hidden ${
+          class={`absolute  bottom-0 h-full  w-full bg-[#08153c]  py-24 pl-4 transition-all duration-500 ease-in-out md:hidden ${
             isMobileMenuOpen.value ? "left-0" : "left-[-100%]"
           } `}
         >
-          {/* <li>
-            <a href="/" class="inline-block px-3 py-7">
-              Home
-            </a>
-          </li> */}
           <Navlinks />
           <div class="mt-4">
             <Button />
