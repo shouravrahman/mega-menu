@@ -174,10 +174,14 @@ export default component$(() => {
       </div>
 
       {/* Second Link - Work */}
-      <div>{/* Add your HTML structure for the "Work" link */}</div>
+      <div>
+        <h1 class="mx-4 py-7 text-sm uppercase hover:text-[#ec4067]">Work</h1>
+      </div>
 
       {/* Third Link - About */}
-      <div>{/* Add your HTML structure for the "About" link */}</div>
+      <div>
+        <h1 class="mx-4 py-7 text-sm uppercase hover:text-[#ec4067]">About</h1>
+      </div>
 
       {/* Fourth Link - Resources */}
       <div>
