@@ -10,7 +10,7 @@ interface Sublink {
    Head?: string;
    headlink?: string;
    desc?: string;
-   links: Link[];
+   links?: Link[];
 }
 
 export const links: Link[] = [
@@ -48,14 +48,29 @@ export const links: Link[] = [
       hasFeatured: true,
       sublinks: [
          {
-            links: [
-               { name: "Blog", link: "#" },
-               { name: "Resources", link: "#" },
-               { name: "Project Calculator", link: "#" },
-               { name: "ROI Calculator", link: "#" },
-            ],
+            Head: "Blog",
+            headlink: "#"
+         },
+         {
+            Head: "Resources",
+            headlink: "#"
+         },
+         {
+            Head: "Project Calculator",
+            headlink: "#"
+         },
+         {
+            Head: "ROI Calculator",
+            headlink: "#"
          },
       ],
    },
    { name: "Contact Us" },
 ];
+
+// links: [
+//    { name: "Blog", link: "#" },
+//    { name: "Resources", link: "#" },
+//    { name: "Project Calculator", link: "#" },
+//    { name: "ROI Calculator", link: "#" },
+// ],

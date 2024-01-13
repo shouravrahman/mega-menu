@@ -19,7 +19,7 @@ export default component$(() => {
             onClick$={() => {
               isMobileMenuOpen.value = !isMobileMenuOpen.value;
             }}
-            class="mt-4 cursor-pointer md:hidden"
+            class="mt-4 cursor-pointer duration-500 md:hidden"
           >
             {isMobileMenuOpen.value ? (
               <img
@@ -47,7 +47,7 @@ export default component$(() => {
 
         {/* mobile menu */}
         <ul
-          class={`absolute  bottom-0 h-full  w-full bg-[#08153c]  py-24 pl-4 duration-500 md:hidden ${
+          class={`absolute  bottom-0 h-full  w-full bg-[#08153c]  py-24 pl-4 duration-500 ease-in md:hidden ${
             isMobileMenuOpen.value ? "left-0" : "left-[-100%]"
           } `}
         >
