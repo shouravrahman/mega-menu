@@ -1,4 +1,19 @@
-export const links = [
+interface Link {
+   name: string;
+   submenu?: boolean;
+   sublinks?: Sublink[];
+   link?: string;
+   hasFeatured?: boolean;
+}
+
+interface Sublink {
+   Head?: string;
+   headlink?: string;
+   desc?: string;
+   links: Link[];
+}
+
+export const links: Link[] = [
    {
       name: "How We Help",
       submenu: true,
@@ -40,7 +55,6 @@ export const links = [
                { name: "ROI Calculator", link: "#" },
             ],
          },
-
       ],
    },
    { name: "Contact Us" },
