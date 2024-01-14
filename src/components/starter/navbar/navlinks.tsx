@@ -3,7 +3,6 @@ import type { QwikJSX } from "@builder.io/qwik";
 import { $, component$, useSignal } from "@builder.io/qwik";
 // import { links as navigationLinks } from "./data";
 
-// Define types for the data
 interface Link {
   name: string;
   submenu?: boolean;
@@ -11,7 +10,13 @@ interface Link {
   link?: string;
   hasFeatured?: boolean;
 }
-
+interface IconProps {
+  src: string;
+  alt: string;
+  classes?: string;
+  height?: number;
+  width?: number;
+}
 interface Sublink {
   Head?: string;
   headlink?: string;
@@ -27,12 +32,17 @@ interface SingleLink {
 export default component$(() => {
   // State for heading
   const heading = useSignal("");
+  const megaMenuVisible = useSignal(false);
 
   const handleClick = $((link: string) => {
     if (heading.value === link) {
-      heading.value = ""; // Close the link if double-clicked
+      heading.value = "";
     } else {
       heading.value = link;
+      // Toggle mobile menu visibility when How We Help or Resources are clicked
+      if (link === "How We Help" || link === "Resources") {
+        megaMenuVisible.value = !megaMenuVisible.value;
+      }
     }
   });
 
@@ -41,18 +51,19 @@ export default component$(() => {
       {/* First Link - How We Help */}
       <div>
         <div class="group px-3 text-left transition-all duration-1000 ease-in-out md:cursor-pointer">
-          <div class=" flex items-center justify-around gap-2">
+          <div class="group flex items-center justify-around gap-2">
             <h1
-              class="py-7 text-sm uppercase hover:text-[#ec4067]"
-              //
+              class="py-7 text-sm uppercase md:hover:text-[#ec4067]"
               onClick$={() => handleClick("How We Help")}
             >
               How We Help
             </h1>
-            <Icon
+            <img
+              class={`${
+                heading.value === "How We Help" ? "rotate-180" : ""
+              } z-50 bg-transparent duration-300 md:group-hover:rotate-180`}
               src="arrow-down.svg"
-              alt="arrow"
-              classes="z-50 bg-transparent duration-500 group-hover:rotate-180"
+              alt=""
               height={10}
               width={20}
             />
@@ -64,156 +75,80 @@ export default component$(() => {
               </div>
               <div class="relative grid grid-cols-2 gap-4 rounded-lg border-t border-[#ec4067] bg-[#08153c] p-4">
                 <div class=" px-4 py-4">
-                  <h1 class=" my-6 flex items-center text-left text-lg font-semibold capitalize">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Website Redesign
-                    </a>
-                    <Icon
-                      src="arrow-forward-circle.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                      height={30}
-                      width={30}
-                    />
-                  </h1>
+                  <DropdownLinkWithIcon href="#" title="Website Redesign" />
                   <p class="my-6 text-lg font-semibold">
                     Elevate your brand with website redesign services that take
                     your website from “good enough” to your industry’s gold
                     standard.
                   </p>
-                  <li class="my-2 flex text-sm text-gray-700">
-                    <a class=" hover:text-[#ec4067]" href="#">
-                      Web Design
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
-                  <li class="my-2 flex text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Web Development
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
-                  <li class="my-2 flex text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Wordpress
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
-                  <li class="my-2 flex  text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Shopify
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
+                  <DropdownLinkAlt href="#" title="Website Design" />
+                  <DropdownLinkAlt href="#" title="Website Development" />
+                  <DropdownLinkAlt href="#" title=" Wordpress" />
+                  <DropdownLinkAlt href="#" title=" Shopify" />
                 </div>
                 <div class="absolute inset-y-0 left-1/2 w-1 -translate-x-1/2  transform border-l-[1px] border-gray-700"></div>
                 <div class="group px-8 py-8">
-                  <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize group-hover:text-[#ec4067]">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Website Support
-                    </a>
-
-                    <Icon
-                      src="arrow-forward-circle.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                      height={30}
-                      width={30}
-                    />
-                  </h1>
+                  <DropdownLinkWithIcon href="#" title="Website Support" />
                   <p class="my-6 text-lg font-semibold">
                     Enhance and protect your existing site with dedicated
                     website support that plans, executes, and measures
                     improvements.
                   </p>
-                  <li class="my-2 flex text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      CRO
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
-                  <li class="my-2 flex text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Landing Pages
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
-                  <li class=" my-2 flex text-sm text-gray-700">
-                    <a class="hover:text-[#ec4067]" href="#">
-                      Website Analytics
-                    </a>
-                    <Icon
-                      src="arrow-down.svg"
-                      alt="arrow"
-                      classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
-                      height={15}
-                      width={20}
-                    />
-                  </li>
+                  <DropdownLinkAlt href="#" title="CRO" />
+                  <DropdownLinkAlt href="#" title="Website Analytics" />
+                  <DropdownLinkAlt href="#" title="Landing Pages" />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* mobile menu for how we help */}
-        <div
-          class={`${
-            heading.value === "How We Help" ? "md:hidden" : "hidden"
-          } bg-inherit`}
-        >
-          <div>
-            <div>
-              <h1 class="py-2 pl-6 pr-5 text-lg font-semibold md:pr-0">
+          {/* mobile */}
+          <div
+            class={`${
+              heading.value === "How We Help" ? "block" : "hidden"
+            } transition-all duration-300 ease-in-out md:hidden`}
+          >
+            <div class="transition-all duration-300 ease-in-out">
+              <h1 class="py-2 pl-2 pr-5 text-sm font-semibold md:pr-0">
                 Website Redesign
               </h1>
-              <SingleSubMenuLink href="#" title="Web Development" />
-              <SingleSubMenuLink href="#" title="Web Design" />
-              <SingleSubMenuLink href="#" title="Wordpress" />
-              <SingleSubMenuLink href="#" title="Shopify" />
-            </div>
-            <div>
-              <h1 class="py-2 pl-6 pr-5 text-lg font-semibold md:pr-0">
+              <SingleSubMenuLink
+                href="#"
+                title="Web Development"
+                classes="transition-all duration-150 ease-in-out"
+              />
+              <SingleSubMenuLink
+                href="#"
+                title="Web Design"
+                classes="transition-all duration-300 ease-in-out"
+              />
+              <SingleSubMenuLink
+                href="#"
+                title="Wordpress"
+                classes="transition-all duration-300 ease-in-out"
+              />
+              <SingleSubMenuLink
+                href="#"
+                title="Shopify"
+                classes="transition-all duration-300 ease-in-out"
+              />
+              <h1 class="py-2 pl-2 pr-5 text-sm font-semibold md:pr-0">
                 Website Support
               </h1>
-              <SingleSubMenuLink href="#" title="CRO" />
-              <SingleSubMenuLink href="#" title="Landing Pages" />
-              <SingleSubMenuLink href="#" title="Website Analytics" />
+              <SingleSubMenuLink
+                href="#"
+                title="CRO"
+                classes="transition-all duration-150 ease-in-out"
+              />
+              <SingleSubMenuLink
+                href="#"
+                title="Landing Pages"
+                classes="transition-all duration-300 ease-in-out"
+              />
+              <SingleSubMenuLink
+                href="#"
+                title="Web Analytics"
+                classes="transition-all duration-300 ease-in-out"
+              />
             </div>
           </div>
         </div>
@@ -223,22 +158,18 @@ export default component$(() => {
 
       {/* third Link - Resources */}
       <div class="">
-        {/* for desktop */}
         <div class="group px-3 text-left md:cursor-pointer">
           <div class="group flex items-center justify-around gap-2">
             <h1
-              class="py-7 text-sm uppercase hover:text-[#ec4067]"
-              // onClick$={() =>
-              //   heading.value !== "Resources"
-              //     ? (heading.value = "Resources")
-              //     : (heading.value = "")
-              // }
+              class="py-7 text-sm uppercase md:hover:text-[#ec4067]"
               onClick$={() => handleClick("Resources")}
             >
               Resources
             </h1>
             <img
-              class="z-50 bg-transparent duration-300 group-hover:rotate-180"
+              class={`${
+                heading.value === "Resources" ? "rotate-180" : ""
+              } z-50 bg-transparent duration-300 md:group-hover:rotate-180`}
               src="arrow-down.svg"
               alt=""
               height={10}
@@ -253,60 +184,16 @@ export default component$(() => {
               <div class="grid grid-cols-2 gap-10 rounded-lg border-t border-[#ec4067] bg-[#08153c] px-8 py-8 ">
                 <div>
                   <div class="group">
-                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize">
-                      <a class="hover:text-[#ec4067]" href="#">
-                        Blog
-                      </a>
-                      <img
-                        src="arrow-forward-circle.svg"
-                        alt="arrow"
-                        class="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                        height={30}
-                        width={30}
-                      />
-                    </h1>
+                    <DropdownLinkWithIcon href="#" title="Blog" />
                   </div>
                   <div class="group">
-                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize group-hover:text-[#ec4067]">
-                      <a class="hover:text-[#ec4067]" href="#">
-                        Resources
-                      </a>
-                      <img
-                        src="arrow-forward-circle.svg"
-                        alt="arrow"
-                        class="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                        height={30}
-                        width={30}
-                      />
-                    </h1>
+                    <DropdownLinkWithIcon href="#" title="Resources" />
                   </div>
                   <div class="group">
-                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize group-hover:text-[#ec4067]">
-                      <a class="hover:text-[#ec4067]" href="#">
-                        Project Calculator
-                      </a>
-                      <img
-                        src="arrow-forward-circle.svg"
-                        alt="arrow"
-                        class="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                        height={30}
-                        width={30}
-                      />
-                    </h1>
+                    <DropdownLinkWithIcon href="#" title="Project Calculator" />
                   </div>
                   <div class="group">
-                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize group-hover:text-[#ec4067]">
-                      <a class="hover:text-[#ec4067]" href="#">
-                        ROI Calculator
-                      </a>
-                      <img
-                        src="arrow-forward-circle.svg"
-                        alt="arrow"
-                        class="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
-                        height={30}
-                        width={30}
-                      />
-                    </h1>
+                    <DropdownLinkWithIcon href="#" title="ROI Calculator" />
                   </div>
                 </div>
 
@@ -340,34 +227,32 @@ export default component$(() => {
         </div>
 
         {/* mobile menu for resources */}
+
         <div
           class={`${
-            heading.value === "Resources"
-              ? " transition-all duration-500 ease-in-out hover:opacity-100 group-hover:opacity-100 md:hidden"
-              : "hidden"
-          }   bg-inherit`}
+            heading.value === "Resources" ? "block" : "hidden"
+          } transition-all duration-300 ease-in-out md:hidden`}
         >
-          <div class="transition-all">
+          <div class="grid ">
             <SingleSubMenuLink
               href="#"
               title="Blog"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
+              classes="py-2 pl-4 pr-5 text-base font-semibold md:pr-0 duration-300 transform transition-all hover:opacity-75"
             />
-
             <SingleSubMenuLink
               href="#"
               title="Resources"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
+              classes="py-2 pl-4 pr-5 text-base font-semibold md:pr-0 duration-300 transform transition-all hover:opacity-75"
             />
             <SingleSubMenuLink
               href="#"
               title="Project Calculator"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
+              classes="py-2 pl-4 pr-5 text-base font-semibold md:pr-0 duration-300 transform transition-all hover:opacity-75"
             />
             <SingleSubMenuLink
               href="#"
               title="ROI Calculator"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
+              classes="py-2 pl-4 pr-5 text-base font-semibold md:pr-0 duration-300 transform transition-all hover:opacity-75"
             />
           </div>
         </div>
@@ -385,15 +270,20 @@ const SingleSubMenuLink = ({
   classes,
 }: SingleLink): QwikJSX.Element => {
   return (
-    <li class={`py-2 pl-10 ${classes}`}>
-      <a href={href}>{title}</a>
+    <li class={`py-2 pl-6 ${classes} text-base `}>
+      <a
+        href={href}
+        class="transform opacity-100 transition-all duration-1000 ease-in-out"
+      >
+        {title}
+      </a>
     </li>
   );
 };
 const SingleMainNavLink = ({ href, title }: SingleLink): QwikJSX.Element => {
   return (
     <div>
-      <a href={href} class="  ">
+      <a href={href} class="">
         <h1 class="mx-4 py-7 text-sm uppercase text-white hover:text-[#ec4067]">
           {title}
         </h1>
@@ -401,13 +291,40 @@ const SingleMainNavLink = ({ href, title }: SingleLink): QwikJSX.Element => {
     </div>
   );
 };
-interface IconProps {
-  src: string;
-  alt: string;
-  classes?: string;
-  height?: number;
-  width?: number;
-}
+
+const DropdownLinkWithIcon = ({ href, title }: SingleLink): QwikJSX.Element => {
+  return (
+    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize group-hover:text-[#ec4067]">
+      <a class="hover:text-[#ec4067]" href={href}>
+        {title}
+      </a>
+
+      <Icon
+        src="arrow-forward-circle.svg"
+        alt="arrow"
+        classes="ml-2 -rotate-45 text-white duration-200 hover:rotate-0"
+        height={30}
+        width={30}
+      />
+    </h1>
+  );
+};
+const DropdownLinkAlt = ({ href, title }: SingleLink): QwikJSX.Element => {
+  return (
+    <li class=" my-2 flex text-sm text-gray-700">
+      <a class="hover:text-[#ec4067]" href={href}>
+        {title}
+      </a>
+      <Icon
+        src="arrow-down.svg"
+        alt="arrow"
+        classes="ml-2 -rotate-90 fill-white duration-200 hover:rotate-0"
+        height={15}
+        width={20}
+      />
+    </li>
+  );
+};
 
 const Icon = ({ src, alt, classes, height, width }: IconProps) => {
   return (
