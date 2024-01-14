@@ -1,5 +1,6 @@
 // @ts-ignore
-import { $, QwikJSX, component$, useSignal } from "@builder.io/qwik";
+import type { QwikJSX } from "@builder.io/qwik";
+import { $, component$, useSignal } from "@builder.io/qwik";
 // import { links as navigationLinks } from "./data";
 
 // Define types for the data
@@ -40,7 +41,7 @@ export default component$(() => {
       {/* First Link - How We Help */}
       <div>
         <div class="group px-3 text-left transition-all duration-1000 ease-in-out md:cursor-pointer">
-          <div class="group flex items-center justify-around gap-2">
+          <div class=" flex items-center justify-around gap-2">
             <h1
               class="py-7 text-sm uppercase hover:text-[#ec4067]"
               //
@@ -51,12 +52,12 @@ export default component$(() => {
             <Icon
               src="arrow-down.svg"
               alt="arrow"
-              classes="z-50 bg-transparent duration-300 group-hover:rotate-180"
+              classes="z-50 bg-transparent duration-500 group-hover:rotate-180"
               height={10}
               width={20}
             />
           </div>
-          <div>
+          <div class="opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100 group-hover:opacity-100">
             <div class="absolute top-20 hidden max-w-[60vw]  hover:md:block group-hover:md:block">
               <div class="py-3">
                 <div class="absolute left-3 z-40 mt-1 h-4 w-4 rotate-45 border-l border-t border-[#ec4067] bg-[#08153c]"></div>
@@ -221,7 +222,8 @@ export default component$(() => {
       <SingleMainNavLink href="#" title="Work" />
 
       {/* third Link - Resources */}
-      <div>
+      <div class="">
+        {/* for desktop */}
         <div class="group px-3 text-left md:cursor-pointer">
           <div class="group flex items-center justify-around gap-2">
             <h1
@@ -243,7 +245,7 @@ export default component$(() => {
               width={20}
             />
           </div>
-          <div>
+          <div class="opacity-0 transition-opacity duration-500 ease-in-out hover:opacity-100 group-hover:opacity-100">
             <div class="absolute top-20 hidden max-w-[50vw]  duration-300 hover:md:block group-hover:md:block">
               <div class="py-3">
                 <div class="absolute left-3 mt-1 h-4 w-4 rotate-45 border-l border-t border-[#ec4067] bg-[#08153c]"></div>
@@ -251,7 +253,7 @@ export default component$(() => {
               <div class="grid grid-cols-2 gap-10 rounded-lg border-t border-[#ec4067] bg-[#08153c] px-8 py-8 ">
                 <div>
                   <div class="group">
-                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize hover:text-[#ec4067]">
+                    <h1 class="my-6 flex items-center text-left text-lg font-semibold capitalize">
                       <a class="hover:text-[#ec4067]" href="#">
                         Blog
                       </a>
@@ -337,33 +339,35 @@ export default component$(() => {
           </div>
         </div>
 
-        {/* mobile */}
+        {/* mobile menu for resources */}
         <div
           class={`${
-            heading.value === "Resources" ? "md:hidden" : "hidden"
-          } bg-inherit`}
+            heading.value === "Resources"
+              ? " transition-all duration-500 ease-in-out hover:opacity-100 group-hover:opacity-100 md:hidden"
+              : "hidden"
+          }   bg-inherit`}
         >
-          <div>
+          <div class="transition-all">
             <SingleSubMenuLink
               href="#"
               title="Blog"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0"
+              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
             />
 
             <SingleSubMenuLink
               href="#"
               title="Resources"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0"
+              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
             />
             <SingleSubMenuLink
               href="#"
               title="Project Calculator"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0"
+              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
             />
             <SingleSubMenuLink
               href="#"
               title="ROI Calculator"
-              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0"
+              classes="py-2 pl-4 pr-5 text-lg font-semibold md:pr-0 duration-500"
             />
           </div>
         </div>
