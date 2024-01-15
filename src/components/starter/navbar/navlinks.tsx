@@ -50,7 +50,7 @@ export default component$(() => {
     <div class="flex flex-col items-start font-medium md:flex-row md:items-center md:justify-between">
       {/* First Link - How We Help */}
       <div>
-        <div class="group px-3 text-left transition-all duration-1000 ease-in-out md:cursor-pointer">
+        <div class="group pr-3 text-left transition-all duration-1000 ease-in-out md:cursor-pointer">
           <div class="group flex items-center justify-around gap-2">
             <h1
               class="py-7 text-sm uppercase md:hover:text-[#ec4067]"
@@ -104,7 +104,9 @@ export default component$(() => {
           {/* mobile */}
           <div
             class={`${
-              heading.value === "How We Help" ? "block" : "hidden"
+              heading.value === "How We Help"
+                ? "origin-top scale-y-100 transform opacity-100"
+                : "h-0 origin-top scale-y-0 transform overflow-hidden opacity-0"
             } transition-all duration-300 ease-in-out md:hidden`}
           >
             <div class="transition-all duration-300 ease-in-out">
@@ -123,7 +125,7 @@ export default component$(() => {
               />
               <SingleSubMenuLink
                 href="#"
-                title="Wordpress"
+                title="WordPress"
                 classes="transition-all duration-300 ease-in-out"
               />
               <SingleSubMenuLink
@@ -158,7 +160,7 @@ export default component$(() => {
 
       {/* third Link - Resources */}
       <div class="">
-        <div class="group px-3 text-left md:cursor-pointer">
+        <div class="group pr-3 text-left md:cursor-pointer">
           <div class="group flex items-center justify-around gap-2">
             <h1
               class="py-7 text-sm uppercase md:hover:text-[#ec4067]"
@@ -230,10 +232,12 @@ export default component$(() => {
 
         <div
           class={`${
-            heading.value === "Resources" ? "block" : "hidden"
+            heading.value === "Resources"
+              ? "origin-top scale-y-100 transform opacity-100"
+              : "h-0 origin-top scale-y-0 transform overflow-hidden opacity-0"
           } transition-all duration-300 ease-in-out md:hidden`}
         >
-          <div class="grid ">
+          <div class="grid">
             <SingleSubMenuLink
               href="#"
               title="Blog"
